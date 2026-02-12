@@ -95,7 +95,7 @@ export function Model() {
                     style={{ pointerEvents: 'none' }}
                     zIndexRange={[100, 0]}
                 >
-                    <div className="text-white font-bold text-6xl whitespace-nowrap select-none drop-shadow-xl flex items-center justify-center p-4" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    <div className="text-black font-bold text-6xl whitespace-nowrap select-none drop-shadow-xl flex items-center justify-center p-4" style={{ fontFamily: 'Inter, sans-serif' }}>
                         {customText}
                     </div>
                 </Html>
