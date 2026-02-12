@@ -103,7 +103,7 @@ export function Model() {
 
             {/* NFC Indicator - Refined */}
             {nfcEnabled && (
-                <mesh position={[0, -0.6, 0.5]}>
+                <mesh position={isDecoracion ? [1.5, -0.6, 0.5] : [0, -0.6, 0.5]} rotation={isDecoracion ? [0, -Math.PI / 4, 0] : [0, 0, 0]}>
                     <ringGeometry args={[0.18, 0.22, 32]} />
                     <meshBasicMaterial
                         color="#8B5CF6"
