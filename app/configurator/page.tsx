@@ -14,10 +14,10 @@ const Experience = dynamic(() => import('@/components/Experience'), {
 
 export default function ConfiguratorPage() {
     return (
-        <div className="h-screen w-full flex flex-col lg:flex-row overflow-hidden bg-black">
+        <div className="h-[100dvh] w-full flex flex-col lg:flex-row overflow-hidden bg-black">
 
             {/* 3D Visualizer Area */}
-            <div className="relative w-full h-[60vh] lg:h-full lg:flex-1 bg-gradient-to-b from-gray-900 to-black">
+            <div className="relative w-full h-[45dvh] lg:h-full lg:flex-1 bg-gradient-to-b from-gray-900 to-black">
 
                 {/* Back Button */}
                 <div className="absolute top-6 left-6 z-10">
@@ -35,9 +35,9 @@ export default function ConfiguratorPage() {
 
             {/* Controls Area */}
             {/* Desktop: Right Panel */}
-            {/* Mobile: Bottom Sheet logic (simple static placement for now, can be enhanced to draggable sheet) */}
-            <div className="w-full lg:w-[480px] bg-black/80 lg:bg-black/40 backdrop-blur-2xl border-t lg:border-l border-white/10 h-[40vh] lg:h-full overflow-y-auto z-20 shadow-2xl">
-                <div className="h-full flex flex-col justify-center p-6 lg:p-10">
+            {/* Mobile: Bottom Sheet logic */}
+            <div className="w-full lg:w-[480px] bg-black/80 lg:bg-black/40 backdrop-blur-2xl border-t lg:border-l border-white/10 h-[55dvh] lg:h-full overflow-y-auto z-20 shadow-2xl">
+                <div className="min-h-full flex flex-col justify-start lg:justify-center p-6 lg:p-10">
                     <ConfiguratorUI />
                 </div>
             </div>
