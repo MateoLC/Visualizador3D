@@ -17,7 +17,7 @@ export default function Experience() {
     return (
         <div className="w-full h-full min-h-[50vh] lg:min-h-screen bg-black/5 relative">
             <Canvas shadows camera={{ position: [0, 0, 18], fov: 45 }}>
-                <color attach="background" args={['#101010']} />
+                <color attach="background" args={['#ffffff']} />
 
                 <group position={[0, -0.5, 0]}>
                     <Suspense fallback={<Loader />}>
