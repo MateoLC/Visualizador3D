@@ -16,12 +16,9 @@ const MODELS = [
 
 const COLORS = [
     { name: 'Red', value: '#EF4444' },
-    { name: 'Blue', value: '#3B82F6' },
     { name: 'Green', value: '#10B981' },
-    { name: 'Purple', value: '#8B5CF6' },
     { name: 'Black', value: '#171717' },
     { name: 'White', value: '#F5F5F5' },
-    { name: 'Orange', value: '#F97316' },
 ];
 
 export default function ConfiguratorUI() {
@@ -29,6 +26,7 @@ export default function ConfiguratorUI() {
         color, setColor,
         secondaryColor, setSecondaryColor,
         nfcEnabled, toggleNfc,
+        useCustomText, toggleCustomText,
         customText, setCustomText,
         selectedModel, setModel
     } = useConfigStore();
@@ -103,20 +101,44 @@ export default function ConfiguratorUI() {
                 </div>
             )}
 
-            {/* Custom Text */}
+            {/* Custom Text Toggle */}
             <div className="space-y-3">
-                <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
-                    <Type size={16} /> Texto Personalizado
-                </label>
-                <input
-                    type="text"
-                    maxLength={8}
-                    value={customText}
-                    onChange={(e) => setCustomText(e.target.value)}
-                    placeholder="Tu Nombre"
-                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500/50 transition-all"
-                />
-                <p className="text-xs text-gray-500 text-right">{customText.length}/8 caracteres</p>
+                <div
+                    onClick={toggleCustomText}
+                    className={`cursor-pointer group flex items-center justify-between p-4 rounded-xl border transition-all duration-300 ${useCustomText
+                        ? 'bg-green-500/10 border-green-500/50'
+                        : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
+                        }`}
+                >
+                    <div className="flex items-center gap-3">
+                        <div className={`p-2 rounded-full ${useCustomText ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-500'}`}>
+                            <Type size={20} />
+                        </div>
+                        <div>
+                            <h3 className="font-medium text-sm text-black">Texto Personalizado</h3>
+                            <p className="text-xs text-gray-500">Personaliza tu producto</p>
+                        </div>
+                    </div>
+                    <div className={`w-6 h-6 rounded-full border flex items-center justify-center transition-colors ${useCustomText ? 'bg-green-500 border-green-500' : 'border-gray-300'
+                        }`}>
+                        {useCustomText && <Check size={14} className="text-white" />}
+                    </div>
+                </div>
+
+                {/* Input field - visible only when toggled on */}
+                {useCustomText && (
+                    <div className="animate-in fade-in slide-in-from-top-2">
+                        <input
+                            type="text"
+                            maxLength={8}
+                            value={customText}
+                            onChange={(e) => setCustomText(e.target.value)}
+                            placeholder="Tu Nombre"
+                            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500/50 transition-all"
+                        />
+                        <p className="text-xs text-gray-500 text-right mt-1">{customText.length}/8 caracteres</p>
+                    </div>
+                )}
             </div>
 
             {/* NFC Toggle */}

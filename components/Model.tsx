@@ -6,7 +6,7 @@ import { useConfigStore } from '@/utils/store';
 import * as THREE from 'three';
 
 export function Model() {
-    const { color, secondaryColor, nfcEnabled, customText, selectedModel } = useConfigStore();
+    const { color, secondaryColor, nfcEnabled, customText, useCustomText, selectedModel } = useConfigStore();
     const { scene } = useGLTF(selectedModel);
 
     // Determine scale based on model type
@@ -16,17 +16,13 @@ export function Model() {
 
     // Default scale logic
     let modelScale = 0.25;
-    let textPosition: [number, number, number] = [0, -1.2, 0.5]; // Default for Manos (lowered)
 
     if (isCorazon) {
         modelScale = 0.1;
-        textPosition = [0, 0.1, 0.5]; // Keep original for Corazon for now
     } else if (isDecoracion) {
         modelScale = 0.08;
-        textPosition = [0.8, -6.0, 2.5]; // Reverted slightly and lowered a bit (-6.0)
     } else if (isOso) {
         modelScale = 0.12; // Reduced from 0.2 to zoom out
-        textPosition = [0, -1.0, 0.5]; // Keep initial Y guess for now
     }
 
     useEffect(() => {
@@ -84,35 +80,9 @@ export function Model() {
                 <primitive object={scene} scale={modelScale} />
             </Center>
 
-            {/* HTML Text Overlay */}
-            {customText && (
-                <Html
-                    position={textPosition}
-                    transform
-                    occlude
-                    center
-                    scale={0.5}
-                    style={{ pointerEvents: 'none' }}
-                    zIndexRange={[100, 0]}
-                >
-                    <div className="text-black font-bold text-6xl whitespace-nowrap select-none drop-shadow-xl flex items-center justify-center p-4" style={{ fontFamily: 'Inter, sans-serif' }}>
-                        {customText}
-                    </div>
-                </Html>
-            )}
 
-            {/* NFC Indicator - Refined */}
-            {nfcEnabled && (
-                <mesh position={isDecoracion ? [1.5, -0.6, 0.5] : [0, -0.6, 0.5]} rotation={isDecoracion ? [0, -Math.PI / 4, 0] : [0, 0, 0]}>
-                    <ringGeometry args={[0.18, 0.22, 32]} />
-                    <meshBasicMaterial
-                        color="#8B5CF6"
-                        transparent
-                        opacity={0.8}
-                        side={THREE.DoubleSide}
-                    />
-                </mesh>
-            )}
+
+
         </group>
     );
 }
