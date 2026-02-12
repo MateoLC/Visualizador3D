@@ -3,7 +3,9 @@
 import { useConfigStore } from '@/utils/store';
 import { Wifi, Type, Palette, Check, Box } from 'lucide-react';
 
-const BASE_STORAGE_URL = 'http://colosson-antigravity-visualizador-supaba-31c826-72-61-77-85.traefik.me/storage/v1/object/public/models/';
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const secureSupabaseUrl = supabaseUrl.replace('http://', 'https://');
+const BASE_STORAGE_URL = `${secureSupabaseUrl}/storage/v1/object/public/models/`;
 
 const MODELS = [
     { name: 'Manos Corazón', value: `${BASE_STORAGE_URL}MANOS.glb` },
