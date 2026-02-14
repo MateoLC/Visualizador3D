@@ -8,10 +8,10 @@ const secureSupabaseUrl = supabaseUrl.replace('http://', 'https://');
 const BASE_STORAGE_URL = `${secureSupabaseUrl}/storage/v1/object/public/models/`;
 
 const MODELS = [
-    { name: 'Manos Corazón', value: `${BASE_STORAGE_URL}MANOS.glb` },
-    { name: 'Corazón', value: `${BASE_STORAGE_URL}CORAZON.glb` },
-    { name: 'Corazón Colgante', value: `${BASE_STORAGE_URL}Decoracion2.glb` },
-    { name: 'Oso', value: `${BASE_STORAGE_URL}Oso.glb` },
+    { name: 'Manos Corazón', value: `${BASE_STORAGE_URL}MANOS.glb`, price: 50000 },
+    { name: 'Corazón', value: `${BASE_STORAGE_URL}CORAZON.glb`, price: 139000 },
+    { name: 'Corazón Colgante', value: `${BASE_STORAGE_URL}Decoracion2.glb`, price: 99000 },
+    { name: 'Oso', value: `${BASE_STORAGE_URL}Oso.glb`, price: 129000 },
 ];
 
 const COLORS = [
@@ -116,7 +116,7 @@ export default function ConfiguratorUI() {
                         </div>
                         <div>
                             <h3 className="font-medium text-sm text-black">Texto Personalizado</h3>
-                            <p className="text-xs text-gray-500">Personaliza tu producto</p>
+                            <p className="text-xs text-gray-500">Personaliza tu producto (+ $20.000)</p>
                         </div>
                     </div>
                     <div className={`w-6 h-6 rounded-full border flex items-center justify-center transition-colors ${useCustomText ? 'bg-green-500 border-green-500' : 'border-gray-300'
@@ -156,7 +156,7 @@ export default function ConfiguratorUI() {
                         </div>
                         <div>
                             <h3 className="font-medium text-sm text-black">Chip NFC Inteligente</h3>
-                            <p className="text-xs text-gray-500">Habilita funciones digitales</p>
+                            <p className="text-xs text-gray-500">Habilita funciones digitales (+ $20.000)</p>
                         </div>
                     </div>
                     <div className={`w-6 h-6 rounded-full border flex items-center justify-center transition-colors ${nfcEnabled ? 'bg-green-500 border-green-500' : 'border-gray-300'
@@ -167,8 +167,12 @@ export default function ConfiguratorUI() {
             </div>
 
             {/* Action Button - Updated to Green */}
-            <button className="w-full py-4 bg-[#00C15D] text-white font-bold rounded-full hover:bg-[#00A850] transition-all shadow-lg active:scale-95 text-lg">
-                Añadir al Carrito
+            {/* Action Button - Updated to Green with Dynamic Price */}
+            <button className="w-full py-4 bg-[#00C15D] text-white font-bold rounded-full hover:bg-[#00A850] transition-all shadow-lg active:scale-95 text-lg flex justify-between px-8 items-center">
+                <span>Añadir al Carrito</span>
+                <span>
+                    $ {((MODELS.find(m => m.value === selectedModel)?.price || 0) + (nfcEnabled ? 20000 : 0) + (useCustomText ? 20000 : 0)).toLocaleString('es-CO')}
+                </span>
             </button>
         </div>
     );
